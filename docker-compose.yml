@@ -1,0 +1,26 @@
+version: "3.9"
+services: 
+    mongo:
+        image: mongo:4.4-bionic
+        container_name: mongo
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: mongo
+            MONGO_INITDB_ROOT_PASSWORD: mongo
+        volumes: 
+            - mongovolume:/data/db
+    aspnetcore:
+        build: .
+        container_name: aspnetcore
+        ports: 
+            - "5000:5000"
+            # - "5011:5001"
+        volumes: 
+            - .:/home/
+networks: 
+    default:
+        name: aspnetwithmongo
+volumes: 
+    mongovolume:
+        name: mongovolume
+        external: false
