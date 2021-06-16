@@ -4,14 +4,15 @@ services:
         image: mongo:4.4-bionic
         container_name: mongo
         restart: always
-        environment:
-            MONGO_INITDB_ROOT_USERNAME: mongo
-            MONGO_INITDB_ROOT_PASSWORD: mongo
+        # environment:
+        #     MONGO_INITDB_ROOT_USERNAME: mongo
+        #     MONGO_INITDB_ROOT_PASSWORD: mongo
         volumes: 
             - mongovolume:/data/db
     aspnetcore:
         build: .
         container_name: aspnetcore
+        command: /bin/sh -c "while sleep 1000; do :; done"
         ports: 
             - "5000:5000"
             # - "5011:5001"
